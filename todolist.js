@@ -27,7 +27,14 @@ function generateListTodo() {
     `;
     displayList.innerHTML += html;
   });
-  console.log(displayList.innerHTML);
+  // we need to generate all button delete first when we add todolist and then we are able to click button delete
+  document.querySelectorAll(".js-delete-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const index = e.target.getAttribute("data-index");
+      todoList.splice(index, 1);
+      generateListTodo();
+    });
+  });
 }
 document.querySelector(".js-add-btn").onclick = () => {
   const name = nameInput.value;
@@ -36,11 +43,4 @@ document.querySelector(".js-add-btn").onclick = () => {
   nameInput.value = "";
   generateListTodo();
 };
-document.querySelectorAll(".js-delete-btn").forEach((button) => {
-  button.addEventListener("click", (e) => {
-    const index = e.target.getAttribute("data-index");
-    console.log(index);
-    todoList.splice(index, 1);
-    generateListTodo();
-  });
-});
+
