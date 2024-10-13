@@ -22,15 +22,14 @@ function generateListTodo() {
     <p>${item.name}</p>
     <p>${item.date}</p>
     <button class="delete-btn js-delete-btn"
-    data-index="${index}"
+    
     >Delete</button>
     `;
     displayList.innerHTML += html;
   });
   // we need to generate all button delete first when we add todolist and then we are able to click button delete
-  document.querySelectorAll(".js-delete-btn").forEach((button) => {
-    button.addEventListener("click", (e) => {
-      const index = e.target.getAttribute("data-index");
+  document.querySelectorAll(".js-delete-btn").forEach((button, index) => {
+    button.addEventListener("click", () => {
       todoList.splice(index, 1);
       generateListTodo();
     });
@@ -43,4 +42,3 @@ document.querySelector(".js-add-btn").onclick = () => {
   nameInput.value = "";
   generateListTodo();
 };
-
